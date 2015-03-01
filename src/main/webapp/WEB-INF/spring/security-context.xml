@@ -1,0 +1,27 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/security
+http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+	<http auto-config="true">
+		<http-basic />
+		<intercept-url pattern="/index.jsp*" />
+		<form-login login-page="/index.jsp" default-target-url="/player/"
+			always-use-default-target="true" />
+		<logout logout-success-url="/index.jsp" delete-cookies="JSESSIONID" />
+		<intercept-url pattern="/player/**" access="ROLE_USER" />
+		<intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
+	</http>
+
+	<authentication-manager>
+		<authentication-provider user-service-ref="userDetailsService">
+			<password-encoder hash="bcrypt" />
+		</authentication-provider>
+	</authentication-manager>
+
+	<beans:bean id="userDetailsService"
+		class="com.danielcorroto.conspiracy_letters.logic.CustomUserDetailsService" />
+</beans:beans>
+	
