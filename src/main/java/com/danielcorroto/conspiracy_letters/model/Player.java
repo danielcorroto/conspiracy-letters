@@ -1,10 +1,14 @@
 package com.danielcorroto.conspiracy_letters.model;
 
+import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -15,7 +19,9 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "player")
-public class Player {
+public class Player implements Serializable {
+	private static final long serialVersionUID = -2851122693385327463L;
+
 	/**
 	 * Número identificador del usuario
 	 */
@@ -40,6 +46,18 @@ public class Player {
 	 */
 	@Column(nullable = false)
 	private boolean admin;
+
+	/**
+	 * Relación jugador/partidas
+	 */
+	@OneToMany(mappedBy = "player")
+	private List<PlayerGame> playerGames;
+
+	/**
+	 * Relación jugador/sets
+	 */
+	@OneToMany(mappedBy = "player")
+	private List<PlayerGameset> playerGamesets;
 
 	public long getId() {
 		return id;
@@ -71,6 +89,22 @@ public class Player {
 
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
+	}
+
+	public List<PlayerGame> getPlayerGames() {
+		return playerGames;
+	}
+
+	public void setPlayerGames(List<PlayerGame> playerGames) {
+		this.playerGames = playerGames;
+	}
+
+	public List<PlayerGameset> getPlayerGamesets() {
+		return playerGamesets;
+	}
+
+	public void setPlayerGamesets(List<PlayerGameset> playerGamesets) {
+		this.playerGamesets = playerGamesets;
 	}
 
 	@Override
