@@ -49,7 +49,7 @@ public class Game implements Serializable {
 	 * Sets de los que se compone una partida
 	 */
 	@OneToMany(mappedBy = "game")
-	private List<Gameset> gamesets;
+	private List<GameSet> gamesets;
 
 	/**
 	 * Relación jugadores/partida
@@ -73,11 +73,11 @@ public class Game implements Serializable {
 		this.name = name;
 	}
 
-	public List<Gameset> getGamesets() {
+	public List<GameSet> getGamesets() {
 		return gamesets;
 	}
 
-	public void setGamesets(List<Gameset> gamesets) {
+	public void setGamesets(List<GameSet> gamesets) {
 		this.gamesets = gamesets;
 	}
 

@@ -39,7 +39,7 @@ public class PlayerGameset implements Serializable {
 	@Id
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_gameset")
-	private Gameset gameset;
+	private GameSet gameset;
 
 	public PlayerGameset() {
 	}
@@ -60,11 +60,11 @@ public class PlayerGameset implements Serializable {
 		this.player = player;
 	}
 
-	public Gameset getGameset() {
+	public GameSet getGameset() {
 		return this.gameset;
 	}
 
-	public void setGameset(Gameset gameset) {
+	public void setGameset(GameSet gameset) {
 		this.gameset = gameset;
 	}
 }

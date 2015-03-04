@@ -22,7 +22,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "gameset")
-public class Gameset implements Serializable {
+public class GameSet implements Serializable {
 	private static final long serialVersionUID = 5543901443096452813L;
 
 	/**
@@ -58,7 +58,7 @@ public class Gameset implements Serializable {
 	@OneToMany(mappedBy = "gameset")
 	private List<PlayerGameset> playerGamesets;
 
-	public Gameset() {
+	public GameSet() {
 	}
 
 	public int getId() {
