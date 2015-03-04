@@ -13,12 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PlayerController {
 	private static final Logger LOGGER = Logger.getLogger(PlayerController.class);
 
-	@RequestMapping(value = "/")
+	@RequestMapping(value = { "/", "/games" })
 	public String list(Map<String, Object> map) {
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		LOGGER.debug("Default page " + user.getUsername());
-		map.put("name", user.getUsername());
+		
+		LOGGER.debug("Games list " + user.getUsername());
+		map.put("username", user.getUsername());
 
-		return "/test";
+		return "/games";
 	}
 }
