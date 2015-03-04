@@ -7,10 +7,10 @@ http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
 	<http auto-config="true">
 		<http-basic />
-		<intercept-url pattern="/index.jsp*" />
-		<form-login login-page="/index.jsp" default-target-url="/player/"
+		<intercept-url pattern="/login*" />
+		<form-login login-page="/login" default-target-url="/player/"
 			always-use-default-target="true" />
-		<logout logout-success-url="/index.jsp" delete-cookies="JSESSIONID" />
+		<logout logout-success-url="/login" delete-cookies="JSESSIONID" />
 		<intercept-url pattern="/player/**" access="ROLE_USER" />
 		<intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
 	</http>
