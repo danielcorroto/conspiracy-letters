@@ -30,12 +30,14 @@ public class GameServiceImpl implements GameService {
 	public List<JsonGame> getGamesByUsername(String username) {
 		LOGGER.debug("Getting list of game for " + username);
 
-		Player p = playerDao.findByUsername(username);
-		List<PlayerGame> games = playerGameDao.findByPlayer(p);
 		List<JsonGame> jsongames = new ArrayList<JsonGame>();
+		Player p = playerDao.findByUsername(username);
 
-		for (PlayerGame pg : games) {
-			jsongames.add(new JsonGame(pg.getGame().getId(), pg.getGame().getName(), pg.getPoints()));
+		if (p != null) {
+			List<PlayerGame> games = playerGameDao.findByPlayer(p);
+			for (PlayerGame pg : games) {
+				jsongames.add(new JsonGame(pg.getGame().getId(), pg.getGame().getName(), pg.getPoints()));
+			}
 		}
 
 		return jsongames;
