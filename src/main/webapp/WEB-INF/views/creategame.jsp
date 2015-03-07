@@ -6,9 +6,9 @@
     
 	<body>
 	<jsp:include page="includes/menu.jsp">
-		<jsp:param name="selected" value="games" />
+		<jsp:param name="selected" value="creategame" />
 	</jsp:include>
-
+	
 	<div class="container container-separator">
 		<div class="row">
 			<div class="col-xs-12 col-md-4 col-md-offset-4">
