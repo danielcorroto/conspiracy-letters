@@ -19,13 +19,13 @@
 		</div>
 	</div>
 	
-	<div class="container container-separator" id="my_games">
+	<!-- div class="container container-separator" id="my_games">
 		<div class="row">
 			<div class="progress" id="loading">
 				<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
 			</div>
 		</div>
-	</div>
+	</div -->
     
 	<div class="container container-separator" id="my_games">
 		<div class="row">
