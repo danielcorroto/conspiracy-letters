@@ -9,5 +9,12 @@ import com.danielcorroto.conspiracy_letters.model.Player;
  *
  */
 public interface PlayerDao extends BasicDao<Player> {
-
+	/**
+	 * Devuelve la información de un jugador a partir de su nombre
+	 * 
+	 * @param username
+	 *            Nombre del jugador
+	 * @return Información del jugador
+	 */
+	public Player findByUsername(String username);
 }

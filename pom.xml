@@ -167,8 +167,12 @@
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>maven-jetty-plugin</artifactId>
-				<version>${jetty-version}</version><!--configuration> <scanIntervalSeconds>10</scanIntervalSeconds> 
-					<stopKey>foo</stopKey> <stopPort>9999</stopPort> </configuration -->
+				<version>${jetty-version}</version>
+				<configuration>
+					<scanIntervalSeconds>10</scanIntervalSeconds>
+					<stopKey>foo</stopKey>
+					<stopPort>9999</stopPort>
+				</configuration>
 				<executions>
 					<execution>
 						<id>start-jetty</id>

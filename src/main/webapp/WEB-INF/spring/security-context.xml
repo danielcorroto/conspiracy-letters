@@ -13,6 +13,7 @@ http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 		<logout logout-success-url="/login" delete-cookies="JSESSIONID" />
 		<intercept-url pattern="/player/**" access="ROLE_USER" />
 		<intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
+		<intercept-url pattern="/api/**" access="ROLE_USER" />
 	</http>
 
 	<authentication-manager>

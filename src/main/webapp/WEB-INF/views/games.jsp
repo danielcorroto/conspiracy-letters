@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="<c:url value="/static/css/bootstrap-theme.min.css"/>">
         <link rel="stylesheet" href="<c:url value="/static/css/main.css"/>">
 
-        <script src="<c:url value="/static/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"/>"></script>
+        <script src="<c:url value="/static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"/>"></script>
 		
 		<style>
 			body { padding-top: 70px; }
@@ -22,7 +22,8 @@
 			.container-separator { margin-bottom: 10px; }
 		</style>
     </head>
-	
+    
+	<body>
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
@@ -42,6 +43,7 @@
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="#">Link1 <span class="sr-only">(current)</span></a></li>
 					<li><a href="#">Link2</a></li>
+					<li><a href="<c:url value="/j_spring_security_logout" />">Logout</a></li>
 				</ul>
 			</div>
 		</div>
@@ -70,16 +72,10 @@
 			<div class="col-xs-12 col-md-4 col-md-offset-4">
 				<div class="panel panel-success">
 					<div class="panel-heading">
-						<h3 class="panel-title">Panel title</h3>
+						<h3 class="panel-title">Mis partidas</h3>
 					</div>
-					<div class="panel-body">Panel content</div>
 					
 					<div class="list-group" id="my_games_list">
-						<a href="#" class="list-group-item"><span class="badge badge-success">14</span><span class="badge">13</span>Cras justo odio</a>
-						<a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-						<a href="#" class="list-group-item">Morbi leo risus</a>
-						<a href="#" class="list-group-item">Porta ac consectetur ac</a>
-						<a href="#" class="list-group-item">Vestibulum at eros</a>
 					</div>
 				</div>
 			</div>
@@ -87,7 +83,7 @@
 	</div>
 	
 
-	<script src="<c:url value="/static/js/vendor/jquery-1.11.1.min.js"/>"></script>
+	<script src="<c:url value="/static/js/vendor/jquery-1.11.2.min.js"/>"></script>
 
 	<script src="<c:url value="/static/js/vendor/bootstrap.min.js"/>"></script>
 
