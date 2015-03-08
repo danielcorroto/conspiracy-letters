@@ -15,7 +15,7 @@
 			<div class="col-xs-12 col-md-4 col-md-offset-4">
 				<div class="input-group">
 					<span class="input-group-addon" id="addon-game"><span class="glyphicon glyphicon-pencil"></span> Partida</span>
-					<input name="gamename" type="text" class="form-control" placeholder="Partida" aria-describedby="addon-game" value="${gamename}">
+					<input name="name" type="text" class="form-control" placeholder="Partida" aria-describedby="addon-game" value="${gamename}">
 				</div>
 			</div>
 		</div>

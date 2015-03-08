@@ -28,11 +28,14 @@ public class GameInvitation implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 
 	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date creation;
+
+	@Column(nullable = false)
+	private String name;
 
 	/**
 	 * Jugador anfitrión de la partida
@@ -51,11 +54,11 @@ public class GameInvitation implements Serializable {
 	public GameInvitation() {
 	}
 
-	public int getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -65,6 +68,14 @@ public class GameInvitation implements Serializable {
 
 	public void setCreation(Date creation) {
 		this.creation = creation;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Player getPlayer1() {
@@ -81,6 +92,12 @@ public class GameInvitation implements Serializable {
 
 	public void setPlayer2(Player player2) {
 		this.player2 = player2;
+	}
+
+	@Override
+	public String toString() {
+		return "GameInvitation [id=" + id + ", creation=" + creation + ", name=" + name + ", player1=" + player1 + ", player2=" + player2
+				+ "]";
 	}
 
 }

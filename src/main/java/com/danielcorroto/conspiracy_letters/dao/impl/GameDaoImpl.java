@@ -6,7 +6,7 @@ import com.danielcorroto.conspiracy_letters.dao.GameDao;
 import com.danielcorroto.conspiracy_letters.model.Game;
 
 /**
- * Player DAO
+ * Game DAO
  * 
  * @author Daniel Corroto
  *

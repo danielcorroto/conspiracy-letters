@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.danielcorroto.conspiracy_letters.model.Player;
 import com.danielcorroto.conspiracy_letters.model.json.JsonGame;
 import com.danielcorroto.conspiracy_letters.model.json.JsonGameInvitation;
 import com.danielcorroto.conspiracy_letters.service.GameService;
@@ -26,7 +25,7 @@ public class GamesRestController extends BaseController {
 	/**
 	 * Devuelve la lista de partidas del jugador logado
 	 * 
-	 * @return
+	 * @return Lista de mis partidas en juego
 	 */
 	@RequestMapping("/games")
 	public List<JsonGame> gamesList() {
@@ -48,14 +47,29 @@ public class GamesRestController extends BaseController {
 	public boolean addInvitation(@ModelAttribute JsonGameInvitation invitation) {
 		User user = getUser();
 		LOGGER.debug("Invitation from " + user.getUsername() + ": " + invitation);
-
-		if (user.getUsername().equals(invitation.getGuest()) || invitation.getGuest().isEmpty()) {
-			return false;
-		}
-
-		Player p = gameService.findByUsername(invitation.getGuest());
-		// TODO guardar datos en base de datos
-		return p != null;
+		boolean isInvited = gameService.addInvitation(user.getUsername(), invitation);
+		return isInvited;
 	}
 
+	/**
+	 * Partidas a las que se ha invitado
+	 * @return Lista de partidas a las que he invitado
+	 */
+	@RequestMapping("/invitation/list")
+	public List<JsonGameInvitation> invitationList() {
+		User user = getUser();
+		List<JsonGameInvitation> invitation = gameService.getInvitationByUsername(user.getUsername());
+		return invitation;
+	}
+	
+	/**
+	 * Partidas a las que se ha sido invitado
+	 * @return Lista de partidas a las que he invitado
+	 */
+	@RequestMapping("/invited/list")
+	public List<JsonGameInvitation> invitatedList() {
+		User user = getUser();
+		List<JsonGameInvitation> invited = gameService.getInvitedByUsername(user.getUsername());
+		return invited;
+	}
 }

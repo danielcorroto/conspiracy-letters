@@ -26,16 +26,46 @@
 			</div>
 		</div>
 	</div -->
-    
+
 	<div class="container container-separator" id="my_games">
 		<div class="row">
 			<div class="col-xs-12 col-md-4 col-md-offset-4">
 				<div class="panel panel-success">
 					<div class="panel-heading">
-						<h3 class="panel-title">Mis partidas</h3>
+						<h3 class="panel-title">Mis partidas en juego</h3>
 					</div>
 					
 					<div class="list-group" id="my_games_list">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container container-separator" id="my_invited">
+		<div class="row">
+			<div class="col-xs-12 col-md-4 col-md-offset-4">
+				<div class="panel panel-warning">
+					<div class="panel-heading">
+						<h3 class="panel-title">Partidas a las que me han invitado</h3>
+					</div>
+					
+					<div class="list-group" id="my_invited_list">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container container-separator" id="my_invitation">
+		<div class="row">
+			<div class="col-xs-12 col-md-4 col-md-offset-4">
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						<h3 class="panel-title">Mis invitaciones a jugar</h3>
+					</div>
+					
+					<div class="list-group" id="my_invitation_list">
 					</div>
 				</div>
 			</div>
@@ -48,6 +78,8 @@
 	<script type="text/javascript">
 	$(document).ready(function() {
 		loadGamesList();
+		loadInvitedList();
+		loadInvitationList();
 	});
 
 	</script>
