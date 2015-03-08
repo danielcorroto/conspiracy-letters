@@ -22,15 +22,15 @@ public class PlayerGame implements Serializable {
 	private static final long serialVersionUID = 3853523767226541205L;
 
 	/**
-	 * Orden del jugador dentro de la partida
+	 * Orden del jugador dentro de la partida (1..4)
 	 */
-	@Column
+	@Column(nullable = false)
 	private int playerOrder;
 
 	/**
 	 * Puntos del jugador en la partida
 	 */
-	@Column
+	@Column(nullable = false)
 	private int points;
 
 	/**
