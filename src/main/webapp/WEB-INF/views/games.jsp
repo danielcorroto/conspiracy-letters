@@ -50,8 +50,8 @@
 						<h3 class="panel-title">Partidas a las que me han invitado</h3>
 					</div>
 					
-					<div class="list-group" id="my_invited_list">
-					</div>
+					<ul class="list-group" id="my_invited_list">
+					</ul>
 				</div>
 			</div>
 		</div>
@@ -65,8 +65,8 @@
 						<h3 class="panel-title">Mis invitaciones a jugar</h3>
 					</div>
 					
-					<div class="list-group" id="my_invitation_list">
-					</div>
+					<ul class="list-group" id="my_invitation_list">
+					</ul>
 				</div>
 			</div>
 		</div>
