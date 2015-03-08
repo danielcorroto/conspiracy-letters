@@ -12,8 +12,8 @@
 	<div class="container container-separator">
 		<div class="row">
 			<div class="col-xs-12 col-md-4 col-md-offset-4">
-				<button type="button" class="btn btn-success btn-lg btn-block">
-					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> NEW
+				<button type="button" class="btn btn-success btn-lg btn-block" onclick="window.location.href='<c:url value="/player/creategame" />'">
+					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nueva partida
 				</button>
 			</div>
 		</div>
