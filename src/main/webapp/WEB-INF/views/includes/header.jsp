@@ -14,7 +14,5 @@
 		
 		<style>
 			body { padding-top: 70px; }
-			
-			.container-separator { margin-bottom: 10px; }
 		</style>
 	</head>

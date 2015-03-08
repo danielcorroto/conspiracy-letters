@@ -9,11 +9,10 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">
+				<a class="navbar-brand" href="<c:url value="/player/" />">
 					<img alt="Brand" src="<c:url value="/static/img/logo_cl.png"/>" width="30" height="30">
 				</a>
-				<a class="navbar-brand" href="#">Conspiracy Letters</a>
-				<p class="navbar-text">_Conspiracy Letters_</p>
+				<a class="navbar-brand" href="<c:url value="/player/" />">Conspiracy Letters</a>
 			</div>
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">

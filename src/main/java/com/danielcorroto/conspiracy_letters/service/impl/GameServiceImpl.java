@@ -43,4 +43,12 @@ public class GameServiceImpl implements GameService {
 		return jsongames;
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public Player findByUsername(String username) {
+		LOGGER.debug("Getting player name " + username);
+		Player p = playerDao.findByUsername(username);
+		return p;
+	}
+
 }

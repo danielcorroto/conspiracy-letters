@@ -58,6 +58,18 @@ public class Player implements Serializable {
 	 */
 	@OneToMany(mappedBy = "player")
 	private List<PlayerGameset> playerGamesets;
+	
+	/**
+	 * Invitación del jugador (como host)
+	 */
+	@OneToMany(mappedBy="player1")
+	private List<GameInvitation> gameInvitations1;
+
+	/**
+	 * Jugador invitado
+	 */
+	@OneToMany(mappedBy="player2")
+	private List<GameInvitation> gameInvitations2;
 
 	public long getId() {
 		return id;
@@ -105,6 +117,22 @@ public class Player implements Serializable {
 
 	public void setPlayerGamesets(List<PlayerGameset> playerGamesets) {
 		this.playerGamesets = playerGamesets;
+	}
+
+	public List<GameInvitation> getGameInvitations1() {
+		return gameInvitations1;
+	}
+
+	public void setGameInvitations1(List<GameInvitation> gameInvitations1) {
+		this.gameInvitations1 = gameInvitations1;
+	}
+
+	public List<GameInvitation> getGameInvitations2() {
+		return gameInvitations2;
+	}
+
+	public void setGameInvitations2(List<GameInvitation> gameInvitations2) {
+		this.gameInvitations2 = gameInvitations2;
 	}
 
 	@Override
