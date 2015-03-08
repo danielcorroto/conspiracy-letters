@@ -1,2 +1,3 @@
-.container-separator { margin-bottom: 10px; }
+body { padding-top: 60px; }
+.container-separator { margin-top: 10px; }
 ul.navbar-nav > li > a.logout { color: red; }
