@@ -14,8 +14,18 @@
 		<div class="row">
 			<div class="col-xs-12 col-md-4 col-md-offset-4">
 				<div class="input-group">
-					<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
-					<input id="username" name="guest" type="text" class="form-control" placeholder="Jugador" aria-describedby="basic-addon1">
+					<span class="input-group-addon" id="addon-game"><span class="glyphicon glyphicon-pencil"></span> Partida</span>
+					<input name="gamename" type="text" class="form-control" placeholder="Partida" aria-describedby="addon-game" value="${gamename}">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container container-separator">
+		<div class="row">
+			<div class="col-xs-12 col-md-4 col-md-offset-4">
+				<div class="input-group">
+					<span class="input-group-addon" id="addon-player"><span class="glyphicon glyphicon-user"></span></span>
+					<input id="username" name="guest" type="text" class="form-control" placeholder="Invitar a..." aria-describedby="addon-player">
 				</div>
 			</div>
 		</div>
@@ -52,8 +62,8 @@
 		$("form").submit(function(e) {
 			var url = "${pageContext.servletContext.contextPath}" + "/api/invitation/add";
 			$.post(url, $(this).serialize(), function(response) {
-				$("#invitation_ok").slideUp();
-				$("#invitation_ko").slideUp();
+				$("#invitation_ok").hide();
+				$("#invitation_ko").hide();
 				if (response) {
 					$("#invitation_ok").slideDown();
 				} else {

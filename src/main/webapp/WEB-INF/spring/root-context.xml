@@ -49,4 +49,5 @@
 	<tx:annotation-driven transaction-manager="transactionManager" />
 	<context:component-scan base-package="com.danielcorroto.conspiracy_letters" />
 
+	<bean class="com.danielcorroto.conspiracy_letters.logic.InvitationLogic" />
 </beans>

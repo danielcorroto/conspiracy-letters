@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.danielcorroto.conspiracy_letters.model.Player;
 import com.danielcorroto.conspiracy_letters.model.json.JsonGame;
+import com.danielcorroto.conspiracy_letters.model.json.JsonGameInvitation;
 import com.danielcorroto.conspiracy_letters.service.GameService;
 
 @RestController
@@ -42,17 +44,18 @@ public class GamesRestController extends BaseController {
 	 *            Jugador invitado
 	 * @return Si la invitación ha sido correcta
 	 */
-	@RequestMapping("/invitation/add")
-	public boolean addInvitation(@ModelAttribute String guest) {
+	@RequestMapping(value = "/invitation/add", method = RequestMethod.POST)
+	public boolean addInvitation(@ModelAttribute JsonGameInvitation invitation) {
 		User user = getUser();
-		LOGGER.debug("Invitation from " + user.getUsername() + " to " + guest);
-		
-		if (user.getUsername().equals(guest) || guest.isEmpty()) {
+		LOGGER.debug("Invitation from " + user.getUsername() + ": " + invitation);
+
+		if (user.getUsername().equals(invitation.getGuest()) || invitation.getGuest().isEmpty()) {
 			return false;
 		}
 
-		Player p = gameService.findByUsername(guest);
+		Player p = gameService.findByUsername(invitation.getGuest());
 		// TODO guardar datos en base de datos
 		return p != null;
 	}
+
 }

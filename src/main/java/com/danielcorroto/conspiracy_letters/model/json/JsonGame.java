@@ -1,8 +1,23 @@
 package com.danielcorroto.conspiracy_letters.model.json;
 
+/**
+ * Información de la partida que se envía a la Vista
+ * 
+ * @author Daniel Corroto
+ *
+ */
 public class JsonGame {
+	/**
+	 * Identificador de la partida
+	 */
 	private Long id;
+	/**
+	 * Nombre de la partida
+	 */
 	private String name;
+	/**
+	 * Puntuación del jugador en la partida
+	 */
 	private int ownPoints;
 
 	public JsonGame(Long id, String name, int ownPoints) {
