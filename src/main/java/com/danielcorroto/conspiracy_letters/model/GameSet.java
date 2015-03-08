@@ -42,8 +42,14 @@ public class GameSet implements Serializable {
 	 * Jugador que gana el set
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "turn")
+	private Player turn;
+	/**
+	 * Jugador que gana el set
+	 */
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "winner")
-	private Player player;
+	private Player winner;
 
 	/**
 	 * Partida relacionada con el set
@@ -91,6 +97,22 @@ public class GameSet implements Serializable {
 
 	public void setPlayerGamesets(List<PlayerGameset> playerGamesets) {
 		this.playerGamesets = playerGamesets;
+	}
+
+	public Player getTurn() {
+		return turn;
+	}
+
+	public void setTurn(Player turn) {
+		this.turn = turn;
+	}
+
+	public Player getWinner() {
+		return winner;
+	}
+
+	public void setWinner(Player winner) {
+		this.winner = winner;
 	}
 
 }
