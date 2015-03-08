@@ -27,7 +27,7 @@
 					</c:choose>
 						<a href="<c:url value="/player/creategame" />">Nueva partida</a></li>
 					<li>
-						<a href="<c:url value="/j_spring_security_logout" />">Logout</a></li>
+						<a href="<c:url value="/logout" />">Logout</a></li>
 				</ul>
 			</div>
 		</div>
