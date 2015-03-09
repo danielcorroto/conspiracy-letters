@@ -89,6 +89,14 @@ public class Game implements Serializable {
 		this.playerGames = playerGames;
 	}
 
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+
 	@Override
 	public String toString() {
 		return "Match [id=" + id + ", name=" + name + "]";

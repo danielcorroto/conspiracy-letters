@@ -9,10 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.danielcorroto.conspiracy_letters.dao.GameDao;
 import com.danielcorroto.conspiracy_letters.dao.GameInvitationDao;
 import com.danielcorroto.conspiracy_letters.dao.PlayerDao;
 import com.danielcorroto.conspiracy_letters.dao.PlayerGameDao;
+import com.danielcorroto.conspiracy_letters.model.Game;
 import com.danielcorroto.conspiracy_letters.model.GameInvitation;
+import com.danielcorroto.conspiracy_letters.model.GameSet;
 import com.danielcorroto.conspiracy_letters.model.Player;
 import com.danielcorroto.conspiracy_letters.model.PlayerGame;
 import com.danielcorroto.conspiracy_letters.model.json.JsonGame;
@@ -28,6 +31,9 @@ public class GameServiceImpl implements GameService {
 
 	@Autowired
 	private PlayerDao playerDao;
+
+	@Autowired
+	private GameDao gameDao;
 
 	@Autowired
 	private GameInvitationDao gameInvitationDao;
@@ -62,7 +68,7 @@ public class GameServiceImpl implements GameService {
 	@Transactional
 	public boolean addInvitation(String host, JsonGameInvitation invitation) {
 		LOGGER.debug("Adding invitation from " + host + ": " + invitation);
-		
+
 		Player hostPlayer = playerDao.findByUsername(host);
 		Player guestPlayer = playerDao.findByUsername(invitation.getGuest());
 
@@ -85,7 +91,7 @@ public class GameServiceImpl implements GameService {
 	@Transactional(readOnly = true)
 	public List<JsonGameInvitation> getInvitationByUsername(String username) {
 		LOGGER.debug("Getting list of invitation for " + username);
-		
+
 		Player host = playerDao.findByUsername(username);
 		List<GameInvitation> gis = gameInvitationDao.getInvitation(host);
 
@@ -101,7 +107,7 @@ public class GameServiceImpl implements GameService {
 	@Transactional(readOnly = true)
 	public List<JsonGameInvitation> getInvitedByUsername(String username) {
 		LOGGER.debug("Getting list of invited for " + username);
-		
+
 		Player guest = playerDao.findByUsername(username);
 		List<GameInvitation> gis = gameInvitationDao.getInvited(guest);
 
@@ -111,6 +117,92 @@ public class GameServiceImpl implements GameService {
 		}
 
 		return jsongi;
+	}
+
+	@Override
+	@Transactional
+	public JsonGame invitedAccept(String guest, Long invitationId) {
+		LOGGER.debug("Accepting invitation by " + guest + ": " + invitationId);
+
+		// Precondición: error en los datos
+		if (invitationId == null) {
+			return null;
+		}
+
+		Player p = playerDao.findByUsername(guest);
+		GameInvitation invitationData = gameInvitationDao.get(invitationId);
+
+		// Precondición el jugador ha sido invitado a la partida indicada
+		if (invitationData == null || invitationData.getPlayer2().getId() != p.getId()) {
+			return null;
+		}
+
+		Game game = new Game();
+		game.setName(invitationData.getName());
+
+		PlayerGame pg = new PlayerGame();
+		pg.setGame(game);
+		pg.setPlayer(invitationData.getPlayer1());
+		pg.setPlayerOrder(1);
+		pg.setPoints(0);
+
+		List<PlayerGame> listPg = new ArrayList<PlayerGame>();
+		listPg.add(pg);
+		game.setPlayerGames(listPg);
+		List<GameSet> listGs = new ArrayList<GameSet>();
+		game.setGamesets(listGs);
+
+		playerGameDao.save(pg);
+
+		// TODO implementar gameset
+
+		return null;
+	}
+
+	@Override
+	@Transactional
+	public boolean invitedReject(String guest, Long invitationId) {
+		LOGGER.debug("Rejecting invitation by " + guest + ": " + invitationId);
+
+		// Precondición: error en los datos
+		if (invitationId == null) {
+			return false;
+		}
+
+		Player p = playerDao.findByUsername(guest);
+		GameInvitation invitationData = gameInvitationDao.get(invitationId);
+
+		// Precondición el jugador ha sido invitado a la partida indicada
+		if (invitationData == null || invitationData.getPlayer2().getId() != p.getId()) {
+			return false;
+		}
+
+		gameInvitationDao.delete(invitationId);
+
+		return true;
+	}
+
+	@Override
+	@Transactional
+	public boolean invitationCancel(String host, Long invitationId) {
+		LOGGER.debug("Canceling invitation by " + host + ": " + invitationId);
+
+		// Precondición: error en los datos
+		if (invitationId == null) {
+			return false;
+		}
+
+		Player p = playerDao.findByUsername(host);
+		GameInvitation invitationData = gameInvitationDao.get(invitationId);
+
+		// Precondición el jugador ha sido invitado a la partida indicada
+		if (invitationData == null || invitationData.getPlayer1().getId() != p.getId()) {
+			return false;
+		}
+
+		gameInvitationDao.delete(invitationId);
+
+		return true;
 	}
 
 }

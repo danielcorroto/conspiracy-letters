@@ -7,7 +7,7 @@ import com.danielcorroto.conspiracy_letters.model.json.JsonGame;
 import com.danielcorroto.conspiracy_letters.model.json.JsonGameInvitation;
 
 /**
- * Service de patidas
+ * Service de jugadores, partidas e invitaciones
  * 
  * @author Daniel Corroto
  *
@@ -65,5 +65,40 @@ public interface GameService {
 	 * @return Lista de invitaciones
 	 */
 	public List<JsonGameInvitation> getInvitedByUsername(String username);
+
+	/**
+	 * Acepta una invitación
+	 * 
+	 * @param guest
+	 *            Jugador que ha sido invitado
+	 * @param invitation
+	 *            Identificador de la invitación
+	 * @return Información de la partida
+	 */
+	public JsonGame invitedAccept(String guest, Long invitationId);
+
+	/**
+	 * Rechaza una invitación
+	 * 
+	 * @param guest
+	 *            Jugador que ha sido invitado
+	 * @param invitation
+	 *            Identificador de la invitación
+	 * @return true si se ha rechazado correctamente (guest correcto en la
+	 *         invitación)
+	 */
+	public boolean invitedReject(String guest, Long invitationId);
+
+	/**
+	 * Cancela una invitación
+	 * 
+	 * @param host
+	 *            Jugador que ha invitado
+	 * @param invitation
+	 *            Identificador de la invitación
+	 * @return true se se ha cancelado correctamente (host correcto en la
+	 *         invitación)
+	 */
+	public boolean invitationCancel(String host, Long invitationId);
 
 }
