@@ -10,7 +10,7 @@
 					<span class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="<c:url value="/player/" />">
-					<img alt="Brand" src="<c:url value="/static/img/logo_cl.png"/>" width="30" height="30">
+					<img alt="Brand" src="<c:url value="/static/img/logo_cl.png"/>" width="24" height="24">
 				</a>
 				<a class="navbar-brand" href="<c:url value="/player/" />">Conspiracy Letters</a>
 			</div>
