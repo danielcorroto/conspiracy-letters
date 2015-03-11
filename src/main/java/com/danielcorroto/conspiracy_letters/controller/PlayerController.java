@@ -30,9 +30,12 @@ public class PlayerController extends BaseController {
 
 	@RequestMapping("/creategame")
 	public String createGame(Map<String, Object> map) {
-		LOGGER.debug("Creating new game");
+		User user = getUser();
 		
+		LOGGER.debug("Creating new game");
+		map.put("username", user.getUsername());
 		map.put("gamename", invitationLogic.generateGameName());
+		
 		return "/creategame";
 	}
 }
