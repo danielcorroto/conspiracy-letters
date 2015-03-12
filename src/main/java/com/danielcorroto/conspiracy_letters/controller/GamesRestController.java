@@ -75,7 +75,7 @@ public class GamesRestController extends BaseController {
 		List<JsonGameInvitation> invited = gameService.getInvitedByUsername(user.getUsername());
 		return invited;
 	}
-	
+
 	/**
 	 * Acepta una invitación
 	 * 

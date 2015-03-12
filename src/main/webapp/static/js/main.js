@@ -58,3 +58,8 @@ function rejectInvited(id) {
 		$("#invited_"+id).remove();
 	});
 }
+
+function loadGame() {
+	console.log(window.location.href);
+	console.log(document.URL);
+}

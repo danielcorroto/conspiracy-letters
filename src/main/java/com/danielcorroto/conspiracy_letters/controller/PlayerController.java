@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.danielcorroto.conspiracy_letters.logic.InvitationLogic;
@@ -14,7 +15,7 @@ import com.danielcorroto.conspiracy_letters.logic.InvitationLogic;
 @RequestMapping("/player/")
 public class PlayerController extends BaseController {
 	private static final Logger LOGGER = Logger.getLogger(PlayerController.class);
-	
+
 	@Autowired
 	private InvitationLogic invitationLogic;
 
@@ -31,11 +32,21 @@ public class PlayerController extends BaseController {
 	@RequestMapping("/creategame")
 	public String createGame(Map<String, Object> map) {
 		User user = getUser();
-		
+
 		LOGGER.debug("Creating new game");
 		map.put("username", user.getUsername());
 		map.put("gamename", invitationLogic.generateGameName());
-		
+
 		return "/creategame";
+	}
+
+	@RequestMapping("/game/{gameId}")
+	public String showGame(@PathVariable Long gameId, Map<String, Object> map) {
+		User user = getUser();
+
+		LOGGER.debug("Showing game");
+		map.put("username", user.getUsername());
+
+		return "/game";
 	}
 }
