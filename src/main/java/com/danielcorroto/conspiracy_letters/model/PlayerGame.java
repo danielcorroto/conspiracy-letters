@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,6 +24,12 @@ public class PlayerGame implements Serializable {
 	private static final long serialVersionUID = 3853523767226541205L;
 
 	/**
+	 * Número identificador de la relación jugador/partida
+	 */
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
+	/**
 	 * Orden del jugador dentro de la partida (1..4)
 	 */
 	@Column(nullable = false)
@@ -36,7 +44,6 @@ public class PlayerGame implements Serializable {
 	/**
 	 * Jugador de la relación
 	 */
-	@Id
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_player")
 	private Player player;
@@ -44,7 +51,6 @@ public class PlayerGame implements Serializable {
 	/**
 	 * Partida de la relación
 	 */
-	@Id
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_game")
 	private Game game;
@@ -82,6 +88,11 @@ public class PlayerGame implements Serializable {
 
 	public void setPlayerOrder(int playerOrder) {
 		this.playerOrder = playerOrder;
+	}
+
+	@Override
+	public String toString() {
+		return "PlayerGame [playerOrder=" + playerOrder + ", points=" + points + ", player=" + player + ", game=" + game + "]";
 	}
 
 }

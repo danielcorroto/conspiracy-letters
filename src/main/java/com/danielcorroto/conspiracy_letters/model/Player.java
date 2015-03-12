@@ -3,8 +3,10 @@ package com.danielcorroto.conspiracy_letters.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -50,7 +52,7 @@ public class Player implements Serializable {
 	/**
 	 * Relación jugador/partidas
 	 */
-	@OneToMany(mappedBy = "player")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "player", fetch = FetchType.EAGER)
 	private List<PlayerGame> playerGames;
 
 	/**
@@ -58,17 +60,17 @@ public class Player implements Serializable {
 	 */
 	@OneToMany(mappedBy = "player")
 	private List<PlayerGameset> playerGamesets;
-	
+
 	/**
 	 * Invitación del jugador (como host)
 	 */
-	@OneToMany(mappedBy="player1")
+	@OneToMany(mappedBy = "player1")
 	private List<GameInvitation> gameInvitations1;
 
 	/**
 	 * Jugador invitado
 	 */
-	@OneToMany(mappedBy="player2")
+	@OneToMany(mappedBy = "player2")
 	private List<GameInvitation> gameInvitations2;
 
 	public long getId() {

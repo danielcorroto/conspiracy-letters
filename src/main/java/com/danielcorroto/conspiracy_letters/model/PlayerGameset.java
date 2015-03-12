@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -19,7 +21,13 @@ import javax.persistence.Table;
 @Table(name = "player_gameset")
 public class PlayerGameset implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
+	/**
+	 * Número identificador de la relación jugador/set
+	 */
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
 	/**
 	 * Cartas del jugador
 	 */
@@ -28,7 +36,6 @@ public class PlayerGameset implements Serializable {
 	/**
 	 * Jugador de la relación
 	 */
-	@Id
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_player")
 	private Player player;
@@ -36,7 +43,6 @@ public class PlayerGameset implements Serializable {
 	/**
 	 * Set de la relación
 	 */
-	@Id
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_gameset")
 	private GameSet gameset;

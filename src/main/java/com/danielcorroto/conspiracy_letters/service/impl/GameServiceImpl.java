@@ -1,6 +1,8 @@
 package com.danielcorroto.conspiracy_letters.service.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -129,34 +131,67 @@ public class GameServiceImpl implements GameService {
 			return null;
 		}
 
-		Player p = playerDao.findByUsername(guest);
+		Player playerGuest = playerDao.findByUsername(guest);
 		GameInvitation invitationData = gameInvitationDao.get(invitationId);
 
 		// Precondición el jugador ha sido invitado a la partida indicada
-		if (invitationData == null || invitationData.getPlayer2().getId() != p.getId()) {
+		if (invitationData == null || invitationData.getPlayer2().getId() != playerGuest.getId()) {
 			return null;
 		}
 
+		Player playerHost = playerDao.get(invitationData.getPlayer1().getId());
+		List<Player> players = getPlayerListRandomOrdered(playerHost, playerGuest);
+
 		Game game = new Game();
 		game.setName(invitationData.getName());
+		game = gameDao.save(game);
 
+		for (int i = 0; i < players.size(); i++) {
+			Player player = players.get(i);
+			PlayerGame pg = createPlayerGame(player, game, i + 1);
+			playerGameDao.save(pg);
+		}
+
+		// TODO implementar gameset y response
+		
+		gameInvitationDao.delete(invitationId);
+
+		return new JsonGame(game.getId(), game.getName(), 0);
+	}
+
+	/**
+	 * Genera la entidad de relación jugador/partida
+	 * 
+	 * @param player
+	 *            Datos del jugador
+	 * @param game
+	 *            Datos de la partida
+	 * @param order
+	 *            Orden del jugador (1..4)
+	 * @return Entidad jugador/partida
+	 */
+	private PlayerGame createPlayerGame(Player player, Game game, int order) {
 		PlayerGame pg = new PlayerGame();
 		pg.setGame(game);
-		pg.setPlayer(invitationData.getPlayer1());
-		pg.setPlayerOrder(1);
+		pg.setPlayer(player);
+		pg.setPlayerOrder(order);
 		pg.setPoints(0);
 
-		List<PlayerGame> listPg = new ArrayList<PlayerGame>();
-		listPg.add(pg);
-		game.setPlayerGames(listPg);
-		List<GameSet> listGs = new ArrayList<GameSet>();
-		game.setGamesets(listGs);
+		return pg;
+	}
 
-		playerGameDao.save(pg);
+	/**
+	 * Genera una lista ordenada aleatoriamente de jugadores
+	 * 
+	 * @param player
+	 *            Jugadores
+	 * @return
+	 */
+	private List<Player> getPlayerListRandomOrdered(Player... player) {
+		List<Player> list = Arrays.asList(player);
+		Collections.shuffle(list);
 
-		// TODO implementar gameset
-
-		return null;
+		return list;
 	}
 
 	@Override

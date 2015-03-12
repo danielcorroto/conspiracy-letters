@@ -29,8 +29,8 @@ function loadInvitedList() {
 			console.log(key);
 			console.log(val);
 			$("#my_invited_list").append('<li class="list-group-item" id="invited_' + val["id"] + '">' + val["name"] + ' de <i>' + val["guest"] + '</i><div class="row container-separator">' +
-					'<div class="col-xs-6"><button type="button" class="btn btn-danger" onclick="rejectInvitation(' + val["id"] + ')">Rechazar</button></div>' +
-					'<div class="col-xs-6 text-right"><button type="button" class="btn btn-success" onclick="acceptInvitation(' + val["id"] + ')">Aceptar</button></div>' +
+					'<div class="col-xs-6"><button type="button" class="btn btn-danger" onclick="rejectInvited(' + val["id"] + ')">Rechazar</button></div>' +
+					'<div class="col-xs-6 text-right"><button type="button" class="btn btn-success" onclick="acceptInvited(' + val["id"] + ')">Aceptar</button></div>' +
 					'</div></li>');
 		});
 	});
@@ -39,21 +39,22 @@ function loadInvitedList() {
 // Cancel game I invite
 function cancelInvitation(id) {
 	$.getJSON("../api/invitation/cancel/"+id, function(data) {
-		$("#invitation_"+data).remove();
+		$("#invitation_"+id).remove();
 	});
 }
 
 // Accept game I have been invited
-function acceptInvitation(id) {
+function acceptInvited(id) {
 	$.getJSON("../api/invited/accept/"+id, function(data) {
-		//$("#invited_"+data["id"]).remove();
-		//$("#my_games_list").append('<a href="game/' + data["id"] + '" class="list-group-item"><span class="badge label-success">' + data["ownPoints"] + '</span>' + data["name"] + '</a>');
+		console.log(id);
+		$("#invited_"+id).remove();
+		loadGamesList();
 	});
 }
 
 // Reject game I have been invited
-function rejectInvitation(id) {
+function rejectInvited(id) {
 	$.getJSON("../api/invited/reject/"+id, function(data) {
-		$("#invited_"+data).remove();
+		$("#invited_"+id).remove();
 	});
 }
