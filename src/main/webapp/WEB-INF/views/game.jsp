@@ -11,7 +11,7 @@
 
 	<div class="container">
 		<div class="row">
-			<div class="col-xs-8 col-md-3 col-md-offset-4">
+			<div class="col-xs-8 col-md-5 col-md-offset-3">
 				<span class="label label-primary">Partida: Rey listo y tonto</span>
 			</div>
 			<div class="col-xs-4 col-md-1 text-right">
@@ -19,42 +19,23 @@
 			</div>
 		</div>
 		<div clasS="row">
-			<div class="col-xs-6 col-md-2 col-md-offset-4 text-center">
+			<div class="col-xs-4 col-md-2 col-md-offset-3 text-center">
 				<a href="#" data-toggle="modal" data-target="#player1Modal">user</a> <span class="badge label-success">4</span>
 			</div>
-			<div class="col-xs-6 col-md-2 text-center">
+			<div class="col-xs-4 col-md-2 text-center">
 				<a href="#" data-toggle="modal" data-target="#player2Modal">admin</a> <span class="badge">3</span>
+			</div>
+			<div class="col-xs-4 col-md-2 text-center">
+				Baraja
 			</div>
 		</div>
 		<div clasS="row">
-			<div class="col-xs-6 col-md-2 col-md-offset-4">
+			<div class="col-xs-4 col-md-2 col-md-offset-3">
 				<img src="<c:url value="/static/img/card_1_top.png" />" class="img-responsive">
 				<img src="<c:url value="/static/img/card_1_top.png" />" class="img-responsive">
-				<img src="<c:url value="/static/img/card_1_top.png" />" class="img-responsive">
-				<img src="<c:url value="/static/img/card_1_bottom.png" />" class="img-responsive">
-			</div>
-			<div class="col-xs-6 col-md-2">
 				<img src="<c:url value="/static/img/card_1_top.png" />" class="img-responsive">
 				<img src="<c:url value="/static/img/card_1_top.png" />" class="img-responsive">
 				<img src="<c:url value="/static/img/card_1_bottom.png" />" class="img-responsive">
-			</div>
-		</div>
-	</div>
-
-	<div class="container container-separator">
-		<div class="row">
-			<div class="col-xs-8 col-md-2 col-md-offset-4">
-				<img src="<c:url value="/static/img/card_back.png" />" class="deck">
-				<img src="<c:url value="/static/img/card_back.png" />" class="deck">
-				<img src="<c:url value="/static/img/card_back.png" />" class="deck">
-				<img src="<c:url value="/static/img/card_back.png" />" class="deck">
-				<img src="<c:url value="/static/img/card_back.png" />" class="deck">
-				<img src="<c:url value="/static/img/card_back.png" />" class="deck">
-				<img src="<c:url value="/static/img/card_back.png" />" class="deck">
-				<img src="<c:url value="/static/img/card_back.png" />" class="deck">
-				<img src="<c:url value="/static/img/card_back.png" />" class="deck">
-				<img src="<c:url value="/static/img/card_back.png" />" class="deck">
-				<img src="<c:url value="/static/img/card_back.png" />" class="deck">
 			</div>
 			<div class="col-xs-4 col-md-2">
 				<img src="<c:url value="/static/img/card_1_top.png" />" class="img-responsive">
@@ -62,12 +43,73 @@
 				<img src="<c:url value="/static/img/card_1_top.png" />" class="img-responsive">
 				<img src="<c:url value="/static/img/card_1_bottom.png" />" class="img-responsive">
 			</div>
+			<div class="col-xs-4 col-md-2">
+				<img src="<c:url value="/static/img/card_1_top.png" />" class="img-responsive">
+				<img src="<c:url value="/static/img/card_1_top.png" />" class="img-responsive">
+				<img src="<c:url value="/static/img/card_back.png" />" class="img-responsive">
+				<img src="<c:url value="/static/img/card_back.png" />" class="img-responsive">
+				<img src="<c:url value="/static/img/card_back.png" />" class="img-responsive">
+				<img src="<c:url value="/static/img/card_back.png" />" class="img-responsive">
+				<img src="<c:url value="/static/img/card_back.png" />" class="img-responsive">
+				<img src="<c:url value="/static/img/card_back.png" />" class="img-responsive">
+				<img src="<c:url value="/static/img/card_back.png" />" class="img-responsive">
+				<img src="<c:url value="/static/img/card_back.png" />" class="img-responsive">
+				<img src="<c:url value="/static/img/card_back.png" />" class="img-responsive">
+				<img src="<c:url value="/static/img/card_back.png" />" class="img-responsive">
+				<img src="<c:url value="/static/img/card_back.png" />" class="img-responsive">
+				<img src="<c:url value="/static/img/card_1_bottom.png" />" class="img-responsive">
+			</div>
+		</div>
+	</div>
+
+	<div class="container container-separator">
+		<div class="row">
+			<div class="col-xs-8 col-xs-offset-2 col-md-4 col-md-offset-4">
+				<button id="play" class="btn btn-xs btn-primary btn-block">Jugar</button>
+			</div>
+		</div>
+		<div class="row container-separator">
+			<div class="col-xs-6 col-md-2 col-md-offset-4">
+				<img src="<c:url value="/static/img/card_2_top.png" />" class="img-responsive card-top-selected">
+				<img src="<c:url value="/static/img/card_2_bottom.png" />" class="img-responsive card-bottom-selected">
+			</div>
+			<div class="col-xs-6 col-md-2">
+				<img src="<c:url value="/static/img/card_3_top.png" />" class="img-responsive">
+				<img src="<c:url value="/static/img/card_3_bottom.png" />" class="img-responsive">
+			</div>
+			
 		</div>
 	</div>
 	
 	<div class="container container-separator">
 		<div class="row">
-			<duv
+			<div class="col-xs-8 col-xs-offset-2 col-md-2 col-md-offset-5">
+				<div id="attack_1" class="dropup">
+					<button class="btn btn-default btn-block dropdown-toggle" type="button" id="attack1Menu" data-toggle="dropdown" aria-expanded="true">
+						Atacar a:
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu" aria-labelledby="attack1Menu">
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#attack_1">Sacerdote</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#attack_1">Barón</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#attack_1">Doncella</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#attack_1">Príncipe</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#attack_1">Rey</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#attack_1">Condesa</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#attack_1">Princesa</a></li>
+					</ul>
+				</div>
+				<div id="attack_5" class="dropup">
+					<button class="btn btn-default btn-block dropdown-toggle" type="button" id="attack5Menu" data-toggle="dropdown" aria-expanded="true">
+						Atacar a:
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu" aria-labelledby="attack5Menu">
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#attack_5">user</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#attack_5">admin</a></li>
+					</ul>
+				</div>
+			</div>
 		</div>
 	</div>
 
