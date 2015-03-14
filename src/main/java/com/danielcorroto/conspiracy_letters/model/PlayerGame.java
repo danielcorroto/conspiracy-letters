@@ -92,7 +92,7 @@ public class PlayerGame implements Serializable {
 
 	@Override
 	public String toString() {
-		return "PlayerGame [playerOrder=" + playerOrder + ", points=" + points + ", player=" + player + ", game=" + game + "]";
+		return "PlayerGame [id" + id + ", playerOrder=" + playerOrder + ", points=" + points + ", player=" + player + ", game=" + game + "]";
 	}
 
 }

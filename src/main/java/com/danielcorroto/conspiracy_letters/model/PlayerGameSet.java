@@ -21,14 +21,14 @@ import javax.persistence.Table;
 @Table(name = "player_gameset")
 public class PlayerGameSet implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Número identificador de la relación jugador/set
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
+
 	/**
 	 * Cartas del jugador
 	 */
@@ -74,4 +74,10 @@ public class PlayerGameSet implements Serializable {
 	public void setGameset(GameSet gameset) {
 		this.gameset = gameset;
 	}
+
+	@Override
+	public String toString() {
+		return "PlayerGameSet [id=" + id + ", deck=" + deck + ", player=" + player + ", gameset=" + gameset + "]";
+	}
+
 }

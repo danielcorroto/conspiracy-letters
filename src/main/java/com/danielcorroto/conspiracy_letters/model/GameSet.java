@@ -115,4 +115,9 @@ public class GameSet implements Serializable {
 		this.winner = winner;
 	}
 
+	@Override
+	public String toString() {
+		return "GameSet [id=" + id + ", deck=" + deck + ", turn=" + turn + ", game=" + game + "]";
+	}
+
 }
