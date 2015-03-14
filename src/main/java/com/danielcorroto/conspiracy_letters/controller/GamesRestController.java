@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.danielcorroto.conspiracy_letters.model.json.JsonGame;
+import com.danielcorroto.conspiracy_letters.model.json.JsonGameInformation;
 import com.danielcorroto.conspiracy_letters.model.json.JsonGameInvitation;
 import com.danielcorroto.conspiracy_letters.service.GameService;
 
@@ -37,6 +38,14 @@ public class GamesRestController extends BaseController {
 		return games;
 	}
 
+	@RequestMapping("/game/{gameId}")
+	public JsonGameInformation gameInfo(@PathVariable Long gameId) {
+		User user = getUser();
+		LOGGER.debug("Getting game informatcion: " + gameId);
+
+		return new JsonGameInformation();
+	}
+
 	/**
 	 * Invita a un jugador a jugar
 	 * 
@@ -47,7 +56,8 @@ public class GamesRestController extends BaseController {
 	@RequestMapping(value = "/invitation/add", method = RequestMethod.POST)
 	public boolean addInvitation(@ModelAttribute JsonGameInvitation invitation) {
 		User user = getUser();
-		LOGGER.debug("Invitation from " + user.getUsername() + ": " + invitation);
+		LOGGER.debug("Adding invitation from " + user.getUsername() + ": " + invitation);
+
 		boolean isInvited = gameService.addInvitation(user.getUsername(), invitation);
 		return isInvited;
 	}
@@ -60,6 +70,8 @@ public class GamesRestController extends BaseController {
 	@RequestMapping("/invitation/list")
 	public List<JsonGameInvitation> invitationList() {
 		User user = getUser();
+		LOGGER.debug("Getting invitation list");
+
 		List<JsonGameInvitation> invitation = gameService.getInvitationByUsername(user.getUsername());
 		return invitation;
 	}
@@ -72,6 +84,8 @@ public class GamesRestController extends BaseController {
 	@RequestMapping("/invited/list")
 	public List<JsonGameInvitation> invitedList() {
 		User user = getUser();
+		LOGGER.debug("Getting invited list");
+
 		List<JsonGameInvitation> invited = gameService.getInvitedByUsername(user.getUsername());
 		return invited;
 	}
@@ -86,8 +100,9 @@ public class GamesRestController extends BaseController {
 	@RequestMapping("/invited/accept/{invitationId}")
 	public JsonGame invitedAccept(@PathVariable Long invitationId) {
 		User user = getUser();
-		JsonGame game = gameService.invitedAccept(user.getUsername(), invitationId);
+		LOGGER.debug("Accepting invitation: " + invitationId);
 
+		JsonGame game = gameService.invitedAccept(user.getUsername(), invitationId);
 		return game;
 	}
 
@@ -101,8 +116,9 @@ public class GamesRestController extends BaseController {
 	@RequestMapping("/invited/reject/{invitationId}")
 	public Long invitedReject(@PathVariable Long invitationId) {
 		User user = getUser();
-		boolean ok = gameService.invitedReject(user.getUsername(), invitationId);
+		LOGGER.debug("Rejecting invitation: " + invitationId);
 
+		boolean ok = gameService.invitedReject(user.getUsername(), invitationId);
 		return (ok) ? invitationId : null;
 	}
 
@@ -116,8 +132,9 @@ public class GamesRestController extends BaseController {
 	@RequestMapping("/invitation/cancel/{invitationId}")
 	public Long invitationCancel(@PathVariable Long invitationId) {
 		User user = getUser();
-		boolean ok = gameService.invitationCancel(user.getUsername(), invitationId);
+		LOGGER.debug("Canceling invitation: " + invitationId);
 
+		boolean ok = gameService.invitationCancel(user.getUsername(), invitationId);
 		return (ok) ? invitationId : null;
 	}
 
