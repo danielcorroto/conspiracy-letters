@@ -62,7 +62,7 @@ public class GameSet implements Serializable {
 	 * Jugadores que participan en el set
 	 */
 	@OneToMany(mappedBy = "gameset")
-	private List<PlayerGameset> playerGamesets;
+	private List<PlayerGameSet> playerGamesets;
 
 	public GameSet() {
 	}
@@ -91,11 +91,11 @@ public class GameSet implements Serializable {
 		this.game = game;
 	}
 
-	public List<PlayerGameset> getPlayerGamesets() {
+	public List<PlayerGameSet> getPlayerGamesets() {
 		return playerGamesets;
 	}
 
-	public void setPlayerGamesets(List<PlayerGameset> playerGamesets) {
+	public void setPlayerGamesets(List<PlayerGameSet> playerGamesets) {
 		this.playerGamesets = playerGamesets;
 	}
 

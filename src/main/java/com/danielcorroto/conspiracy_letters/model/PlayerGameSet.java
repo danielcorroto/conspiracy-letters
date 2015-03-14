@@ -19,7 +19,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "player_gameset")
-public class PlayerGameset implements Serializable {
+public class PlayerGameSet implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	/**
@@ -28,10 +28,11 @@ public class PlayerGameset implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	
 	/**
 	 * Cartas del jugador
 	 */
-	private int deck;
+	private String deck;
 
 	/**
 	 * Jugador de la relación
@@ -47,14 +48,14 @@ public class PlayerGameset implements Serializable {
 	@JoinColumn(name = "id_gameset")
 	private GameSet gameset;
 
-	public PlayerGameset() {
+	public PlayerGameSet() {
 	}
 
-	public int getDeck() {
+	public String getDeck() {
 		return this.deck;
 	}
 
-	public void setDeck(int deck) {
+	public void setDeck(String deck) {
 		this.deck = deck;
 	}
 

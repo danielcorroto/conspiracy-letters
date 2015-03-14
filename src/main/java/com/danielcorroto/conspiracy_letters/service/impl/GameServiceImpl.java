@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,13 +14,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.danielcorroto.conspiracy_letters.dao.GameDao;
 import com.danielcorroto.conspiracy_letters.dao.GameInvitationDao;
+import com.danielcorroto.conspiracy_letters.dao.GameSetDao;
 import com.danielcorroto.conspiracy_letters.dao.PlayerDao;
 import com.danielcorroto.conspiracy_letters.dao.PlayerGameDao;
+import com.danielcorroto.conspiracy_letters.dao.PlayerGameSetDao;
 import com.danielcorroto.conspiracy_letters.model.Game;
 import com.danielcorroto.conspiracy_letters.model.GameInvitation;
 import com.danielcorroto.conspiracy_letters.model.GameSet;
 import com.danielcorroto.conspiracy_letters.model.Player;
 import com.danielcorroto.conspiracy_letters.model.PlayerGame;
+import com.danielcorroto.conspiracy_letters.model.PlayerGameSet;
 import com.danielcorroto.conspiracy_letters.model.json.JsonGame;
 import com.danielcorroto.conspiracy_letters.model.json.JsonGameInvitation;
 import com.danielcorroto.conspiracy_letters.service.GameService;
@@ -27,15 +31,23 @@ import com.danielcorroto.conspiracy_letters.service.GameService;
 @Service
 public class GameServiceImpl implements GameService {
 	private static final Logger LOGGER = Logger.getLogger(GameServiceImpl.class);
+	
+	private static final String CARD_SEPARATOR = " ";
 
 	@Autowired
 	private PlayerGameDao playerGameDao;
+
+	@Autowired
+	private PlayerGameSetDao playerGameSetDao;
 
 	@Autowired
 	private PlayerDao playerDao;
 
 	@Autowired
 	private GameDao gameDao;
+
+	@Autowired
+	private GameSetDao gameSetDao;
 
 	@Autowired
 	private GameInvitationDao gameInvitationDao;
@@ -142,6 +154,7 @@ public class GameServiceImpl implements GameService {
 		Player playerHost = playerDao.get(invitationData.getPlayer1().getId());
 		List<Player> players = getPlayerListRandomOrdered(playerHost, playerGuest);
 
+		// Partida
 		Game game = new Game();
 		game.setName(invitationData.getName());
 		game = gameDao.save(game);
@@ -152,8 +165,21 @@ public class GameServiceImpl implements GameService {
 			playerGameDao.save(pg);
 		}
 
-		// TODO implementar gameset y response
-		
+		// Set
+		GameSet gameset = new GameSet();
+		gameset.setDeck(createRandomDeck());
+		gameset.setGame(game);
+		gameset.setTurn(players.get(0));
+		gameset = gameSetDao.save(gameset);
+
+		for (int i = 0; i < players.size(); i++) {
+			Player player = players.get(i);
+			PlayerGameSet pgs = createPlayerGameSet(player, gameset, i==0);
+			playerGameSetDao.save(pgs);
+		}
+		gameSetDao.save(gameset);
+
+		// Eliminar invitación
 		gameInvitationDao.delete(invitationId);
 
 		return new JsonGame(game.getId(), game.getName(), 0);
@@ -178,6 +204,31 @@ public class GameServiceImpl implements GameService {
 		pg.setPoints(0);
 
 		return pg;
+	}
+
+	private String createRandomDeck() {
+		List<String> cards = Arrays
+				.asList(new String[] { "1", "1", "1", "1", "1", "2", "2", "3", "3", "4", "4", "5", "5", "6", "7", "8", });
+		Collections.shuffle(cards);
+		return StringUtils.join(cards, CARD_SEPARATOR);
+	}
+
+	private PlayerGameSet createPlayerGameSet(Player player, GameSet gameset, boolean isFirstPlayer) {
+		List<String> cards = Arrays.asList(gameset.getDeck().split(CARD_SEPARATOR));
+		String card = cards.get(0);
+		cards = cards.subList(1, cards.size());
+		if (isFirstPlayer) {
+			card += CARD_SEPARATOR + cards.get(0);
+			cards = cards.subList(1, cards.size());
+		}
+		gameset.setDeck(StringUtils.join(cards, CARD_SEPARATOR));
+
+		PlayerGameSet pgs = new PlayerGameSet();
+		pgs.setDeck(card);
+		pgs.setGameset(gameset);
+		pgs.setPlayer(player);
+
+		return pgs;
 	}
 
 	/**
