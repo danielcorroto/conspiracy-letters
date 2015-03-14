@@ -20,10 +20,10 @@
 		</div>
 		<div clasS="row">
 			<div class="col-xs-6 col-md-2 col-md-offset-4 text-center">
-				user <span class="badge label-success">4</span>
+				<a href="#" data-toggle="modal" data-target="#player1Modal">user</a> <span class="badge label-success">4</span>
 			</div>
 			<div class="col-xs-6 col-md-2 text-center">
-				admin <span class="badge">3</span>
+				<a href="#" data-toggle="modal" data-target="#player2Modal">admin</a> <span class="badge">3</span>
 			</div>
 		</div>
 		<div clasS="row">
@@ -39,18 +39,40 @@
 				<img src="<c:url value="/static/img/card_1_bottom.png" />" class="img-responsive">
 			</div>
 		</div>
-		<div clasS="row">
-			<div class="col-xs-6 col-md-2 col-md-offset-4">
-				<a href="#" data-toggle="modal" data-target="#player1Modal">Final 1</a>
+	</div>
+
+	<div class="container container-separator">
+		<div class="row">
+			<div class="col-xs-8 col-md-2 col-md-offset-4">
+				<img src="<c:url value="/static/img/card_back.png" />" class="deck">
+				<img src="<c:url value="/static/img/card_back.png" />" class="deck">
+				<img src="<c:url value="/static/img/card_back.png" />" class="deck">
+				<img src="<c:url value="/static/img/card_back.png" />" class="deck">
+				<img src="<c:url value="/static/img/card_back.png" />" class="deck">
+				<img src="<c:url value="/static/img/card_back.png" />" class="deck">
+				<img src="<c:url value="/static/img/card_back.png" />" class="deck">
+				<img src="<c:url value="/static/img/card_back.png" />" class="deck">
+				<img src="<c:url value="/static/img/card_back.png" />" class="deck">
+				<img src="<c:url value="/static/img/card_back.png" />" class="deck">
+				<img src="<c:url value="/static/img/card_back.png" />" class="deck">
 			</div>
-			<div class="col-xs-6 col-md-2">
-				<a href="#" data-toggle="modal" data-target="#myModalLog2">Final 2</a>
+			<div class="col-xs-4 col-md-2">
+				<img src="<c:url value="/static/img/card_1_top.png" />" class="img-responsive">
+				<img src="<c:url value="/static/img/card_1_top.png" />" class="img-responsive">
+				<img src="<c:url value="/static/img/card_1_top.png" />" class="img-responsive">
+				<img src="<c:url value="/static/img/card_1_bottom.png" />" class="img-responsive">
 			</div>
 		</div>
 	</div>
 	
+	<div class="container container-separator">
+		<div class="row">
+			<duv
+		</div>
+	</div>
+
 	<!-- Modal rules -->
-	<div class="modal fade" id="rolListModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal fade" id="rolListModal" tabindex="-1" role="dialog" aria-labelledby="rolListModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -85,8 +107,7 @@
 	</div>
 	
 	<!-- Modal player 1 -->
-	<div class="modal fade" id="player1Modal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal fade" id="player1Modal" tabindex="-1" role="dialog" aria-labelledby="player1ModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -102,8 +123,24 @@
 			</div>
 		</div>
 	</div>
+	
 	<!-- Modal player 2 -->
-
+	<div class="modal fade" id="player2Modal" tabindex="-1" role="dialog" aria-labelledby="player2ModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Player log</h4>
+				</div>
+				<div class="modal-body">Jugó tal y cual...</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<%@include file="includes/footer.jsp"%>
 		

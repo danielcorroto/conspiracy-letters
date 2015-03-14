@@ -3,3 +3,4 @@ body { padding-top: 60px; }
 ul.navbar-nav > li > a.logout { color: red; }
 
 .info { color: blue; font-size: 16px; }
+.deck { float:left; }
