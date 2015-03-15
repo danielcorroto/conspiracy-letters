@@ -73,6 +73,10 @@ function rejectInvited(id) {
 }
 
 function loadGame() {
-	console.log(window.location.href);
-	console.log(document.URL);
+	var pos = window.location.href.lastIndexOf("/");
+	var id = window.location.href.substring(pos+1);
+	
+	$.getJSON("../api/game/"+id, function(data) {
+		console.log(data);
+	});
 }

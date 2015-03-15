@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.danielcorroto.conspiracy_letters.model.Player;
 import com.danielcorroto.conspiracy_letters.model.json.JsonGame;
+import com.danielcorroto.conspiracy_letters.model.json.JsonGameInformation;
 import com.danielcorroto.conspiracy_letters.model.json.JsonGameInvitation;
 
 /**
@@ -34,6 +35,18 @@ public interface GameService {
 	 * @return Lista de partidas de ese jugador
 	 */
 	public List<JsonGame> getGamesByUsername(String username);
+
+	/**
+	 * Obtiene la información de una partida para el jugador indicado
+	 * 
+	 * @param id
+	 *            Identificador de la partida
+	 * @param username
+	 *            Nombre del jugador
+	 * @return Información de la partida o null si username no juega la partida
+	 *         id
+	 */
+	public JsonGameInformation getGameInformation(Long id, String username);
 
 	// INVITATION
 

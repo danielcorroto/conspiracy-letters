@@ -38,19 +38,27 @@ public class GamesRestController extends BaseController {
 		return games;
 	}
 
+	/**
+	 * Obtiene información de la partida para el jugador actual
+	 * 
+	 * @param gameId
+	 *            Identificador de la partida
+	 * @return Información sobre la partida
+	 */
 	@RequestMapping("/game/{gameId}")
 	public JsonGameInformation gameInfo(@PathVariable Long gameId) {
 		User user = getUser();
-		LOGGER.debug("Getting game informatcion: " + gameId);
+		LOGGER.debug("Getting game information: " + gameId);
 
-		return new JsonGameInformation();
+		JsonGameInformation game = gameService.getGameInformation(gameId, user.getUsername());
+		return game;
 	}
 
 	/**
 	 * Invita a un jugador a jugar
 	 * 
-	 * @param guest
-	 *            Jugador invitado
+	 * @param invitation
+	 *            Información de la invitación
 	 * @return Si la invitación ha sido correcta
 	 */
 	@RequestMapping(value = "/invitation/add", method = RequestMethod.POST)

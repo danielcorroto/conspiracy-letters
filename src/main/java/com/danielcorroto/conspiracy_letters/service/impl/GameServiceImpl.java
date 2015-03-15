@@ -25,13 +25,15 @@ import com.danielcorroto.conspiracy_letters.model.Player;
 import com.danielcorroto.conspiracy_letters.model.PlayerGame;
 import com.danielcorroto.conspiracy_letters.model.PlayerGameSet;
 import com.danielcorroto.conspiracy_letters.model.json.JsonGame;
+import com.danielcorroto.conspiracy_letters.model.json.JsonGameInformation;
 import com.danielcorroto.conspiracy_letters.model.json.JsonGameInvitation;
+import com.danielcorroto.conspiracy_letters.model.json.JsonPlayerInfo;
 import com.danielcorroto.conspiracy_letters.service.GameService;
 
 @Service
 public class GameServiceImpl implements GameService {
 	private static final Logger LOGGER = Logger.getLogger(GameServiceImpl.class);
-	
+
 	private static final String CARD_SEPARATOR = " ";
 
 	@Autowired
@@ -76,6 +78,93 @@ public class GameServiceImpl implements GameService {
 		}
 
 		return jsongames;
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public JsonGameInformation getGameInformation(Long id, String username) {
+		Player player = playerDao.findByUsername(username);
+		Game game = gameDao.get(id);
+
+		// Precondición deben existir player y game
+		if (player == null || game == null) {
+			return null;
+		}
+
+		GameSet set = gameSetDao.findLastByGame(game);
+
+		// Precondición debe existir set
+		if (set == null) {
+			return null;
+		}
+
+		PlayerGame pg = playerGameDao.findByPlayerAndGame(player, game);
+		List<PlayerGameSet> listpgs = playerGameSetDao.findByGameSet(set);
+
+		// Precondición debe existir jugador juega la partida
+		if (pg == null) {
+			return null;
+		}
+
+		// Generar información de la partida
+		JsonGameInformation info = new JsonGameInformation();
+		info.setName(game.getName());
+		info.setUnplayed(set.getDeck().split(CARD_SEPARATOR).length - 4);
+		info.setDiscarded(getDiscardedFromGameSet(set, 3));
+
+		for (PlayerGameSet pgs : listpgs) {
+			if (pgs.getPlayer().getId() == player.getId()) {
+				JsonPlayerInfo pi = createPlayerInformation(pgs, pg, true);
+				info.setMe(pi);
+			} else {
+				PlayerGame pgInfo = playerGameDao.findByPlayerAndGame(pgs.getPlayer(), game);
+				JsonPlayerInfo pi = createPlayerInformation(pgs, pgInfo, false);
+				info.setRival(pi);
+			}
+		}
+
+		// TODO Auto-generated method stub
+		return info;
+	}
+
+	private JsonPlayerInfo createPlayerInformation(PlayerGameSet pgs, PlayerGame pgInfo, boolean isMe) {
+		JsonPlayerInfo pi = new JsonPlayerInfo();
+		pi.setName(pgs.getPlayer().getName());
+		pi.setPoints(pgInfo.getPoints());
+
+		String[] cards = pgs.getDeck().split(CARD_SEPARATOR);
+		List<Integer> cardList = new ArrayList<Integer>();
+
+		for (String card : cards) {
+			cardList.add(isMe ? Integer.parseInt(card) : 0);
+		}
+		pi.setPlayed(cardList);
+		
+		// FIXME
+		pi.setLog(new ArrayList<String>());
+
+		return pi;
+	}
+
+	/**
+	 * Genera una lista de descartes del mazo a partir de la información de un
+	 * set
+	 * 
+	 * @param set
+	 *            Información del set
+	 * @param size
+	 *            Tamaño de la lista
+	 * @return Lista de descartes
+	 */
+	private List<Integer> getDiscardedFromGameSet(GameSet set, int size) {
+		List<Integer> res = new ArrayList<Integer>();
+
+		String[] cards = set.getDeck().split(CARD_SEPARATOR);
+		for (int i = 0; i < size; i++) {
+			res.add(Integer.parseInt(cards[cards.length - 1 - i]));
+		}
+
+		return res;
 	}
 
 	@Override
@@ -174,7 +263,7 @@ public class GameServiceImpl implements GameService {
 
 		for (int i = 0; i < players.size(); i++) {
 			Player player = players.get(i);
-			PlayerGameSet pgs = createPlayerGameSet(player, gameset, i==0);
+			PlayerGameSet pgs = createPlayerGameSet(player, gameset, i == 0);
 			playerGameSetDao.save(pgs);
 		}
 		gameSetDao.save(gameset);
@@ -206,6 +295,11 @@ public class GameServiceImpl implements GameService {
 		return pg;
 	}
 
+	/**
+	 * Genera una baraja barajada
+	 * 
+	 * @return Cadena con los datos de la baraja
+	 */
 	private String createRandomDeck() {
 		List<String> cards = Arrays
 				.asList(new String[] { "1", "1", "1", "1", "1", "2", "2", "3", "3", "4", "4", "5", "5", "6", "7", "8", });
@@ -213,6 +307,17 @@ public class GameServiceImpl implements GameService {
 		return StringUtils.join(cards, CARD_SEPARATOR);
 	}
 
+	/**
+	 * Crea una entidad de relación jugador/set
+	 * 
+	 * @param player
+	 *            Información del jugador
+	 * @param gameset
+	 *            Información del set
+	 * @param isFirstPlayer
+	 *            Si es el primero en jugar
+	 * @return Entidad jugador/set
+	 */
 	private PlayerGameSet createPlayerGameSet(Player player, GameSet gameset, boolean isFirstPlayer) {
 		List<String> cards = Arrays.asList(gameset.getDeck().split(CARD_SEPARATOR));
 		String card = cards.get(0);
