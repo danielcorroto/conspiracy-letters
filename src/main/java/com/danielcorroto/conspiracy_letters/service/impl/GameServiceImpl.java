@@ -123,27 +123,58 @@ public class GameServiceImpl implements GameService {
 			}
 		}
 
-		// TODO Auto-generated method stub
 		return info;
 	}
 
+	/**
+	 * Crea la información del jugador
+	 * 
+	 * @param pgs
+	 *            Información de la relaión jugador/set
+	 * @param pgInfo
+	 *            Información de la relación jugador/partida
+	 * @param isMe
+	 *            Si la información generada es del jugador que la solicita
+	 * @return Información del jugador
+	 */
 	private JsonPlayerInfo createPlayerInformation(PlayerGameSet pgs, PlayerGame pgInfo, boolean isMe) {
 		JsonPlayerInfo pi = new JsonPlayerInfo();
 		pi.setName(pgs.getPlayer().getName());
 		pi.setPoints(pgInfo.getPoints());
+		pi.setPlayed(transformStringToList(pgs.getDeck(), true));
+		pi.setHand(transformStringToList(pgs.getHand(), isMe));
 
-		String[] cards = pgs.getDeck().split(CARD_SEPARATOR);
-		List<Integer> cardList = new ArrayList<Integer>();
-
-		for (String card : cards) {
-			cardList.add(isMe ? Integer.parseInt(card) : 0);
-		}
-		pi.setPlayed(cardList);
-		
 		// FIXME
 		pi.setLog(new ArrayList<String>());
 
 		return pi;
+	}
+
+	/**
+	 * Transforma una cadena con las cartas en una lista. Si la lista no es
+	 * visible, se devuelve una lista con el tamaño indicado rellena de 0
+	 * 
+	 * @param input
+	 *            Cadena p. ej "1 2 2 8 5"
+	 * @param visible
+	 *            Si la tranformación deja las cartas visibles
+	 * @return Lista de enteros con las cartas
+	 */
+	private List<Integer> transformStringToList(String input, boolean visible) {
+		if (input == null) {
+			input = "";
+		}
+
+		String[] cards = input.split(CARD_SEPARATOR);
+		List<Integer> cardList = new ArrayList<Integer>();
+
+		if (!input.isEmpty()) {
+			for (String card : cards) {
+				cardList.add(visible ? Integer.parseInt(card) : 0);
+			}
+		}
+		
+		return cardList;
 	}
 
 	/**
@@ -329,7 +360,8 @@ public class GameServiceImpl implements GameService {
 		gameset.setDeck(StringUtils.join(cards, CARD_SEPARATOR));
 
 		PlayerGameSet pgs = new PlayerGameSet();
-		pgs.setDeck(card);
+		pgs.setDeck("");
+		pgs.setHand(card);
 		pgs.setGameset(gameset);
 		pgs.setPlayer(player);
 

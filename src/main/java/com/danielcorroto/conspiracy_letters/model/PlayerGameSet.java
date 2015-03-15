@@ -32,6 +32,11 @@ public class PlayerGameSet implements Serializable {
 	/**
 	 * Cartas del jugador
 	 */
+	private String hand;
+
+	/**
+	 * Cartas jugadas por el jugador
+	 */
 	private String deck;
 
 	/**
@@ -57,6 +62,22 @@ public class PlayerGameSet implements Serializable {
 
 	public void setDeck(String deck) {
 		this.deck = deck;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getHand() {
+		return hand;
+	}
+
+	public void setHand(String hand) {
+		this.hand = hand;
 	}
 
 	public Player getPlayer() {

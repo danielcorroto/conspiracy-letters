@@ -74,4 +74,10 @@ public class JsonGameInformation {
 		this.rival = rival;
 	}
 
+	@Override
+	public String toString() {
+		return "JsonGameInformation [name=" + name + ", unplayed=" + unplayed + ", discarded=" + discarded + ", me=" + me + ", rival="
+				+ rival + "]";
+	}
+
 }

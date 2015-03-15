@@ -13,14 +13,22 @@ public class JsonPlayerInfo {
 	 * Nombre del jugador
 	 */
 	private String name;
+
 	/**
 	 * Puntuación del jugador
 	 */
 	private int points;
+
 	/**
 	 * Cartas jugadas por el jugador
 	 */
 	private List<Integer> played;
+
+	/**
+	 * Cartas en la mano del jugador
+	 */
+	private List<Integer> hand;
+
 	/**
 	 * Registro de las jugadas del jugador
 	 */
@@ -56,6 +64,19 @@ public class JsonPlayerInfo {
 
 	public void setLog(List<String> log) {
 		this.log = log;
+	}
+
+	public List<Integer> getHand() {
+		return hand;
+	}
+
+	public void setHand(List<Integer> hand) {
+		this.hand = hand;
+	}
+
+	@Override
+	public String toString() {
+		return "JsonPlayerInfo [name=" + name + ", points=" + points + ", played=" + played + ", hand=" + hand + ", log=" + log + "]";
 	}
 
 }

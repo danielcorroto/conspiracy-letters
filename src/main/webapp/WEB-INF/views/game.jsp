@@ -12,7 +12,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-8 col-md-5 col-md-offset-3">
-				<span class="label label-primary">Partida: Rey listo y tonto</span>
+				<span class="label label-primary">Partida: <span id="game_name"></span></span>
 			</div>
 			<div class="col-xs-4 col-md-1 text-right">
 				<span class="glyphicon glyphicon-info-sign info" data-toggle="modal" data-target="#rolListModal"></span>
@@ -20,44 +20,21 @@
 		</div>
 		<div clasS="row">
 			<div class="col-xs-4 col-md-2 col-md-offset-3 text-center">
-				<a href="#" data-toggle="modal" data-target="#player1Modal">user</a> <span class="badge label-success">4</span>
+				<a href="#" data-toggle="modal" data-target="#player1Modal"><span id="game_player1"></span></a> <span class="badge label-success"><span id="game_points1"></span></span>
 			</div>
 			<div class="col-xs-4 col-md-2 text-center">
-				<a href="#" data-toggle="modal" data-target="#player2Modal">admin</a> <span class="badge">3</span>
+				<a href="#" data-toggle="modal" data-target="#player2Modal"><span id="game_player2"></span></a> <span class="badge"><span id="game_points2"></span></span>
 			</div>
 			<div class="col-xs-4 col-md-2 text-center">
 				Baraja
 			</div>
 		</div>
 		<div clasS="row">
-			<div class="col-xs-4 col-md-2 col-md-offset-3">
-				<img src="<c:url value="/static/img/card_1_top.png" />" class="img-responsive">
-				<img src="<c:url value="/static/img/card_1_top.png" />" class="img-responsive">
-				<img src="<c:url value="/static/img/card_1_top.png" />" class="img-responsive">
-				<img src="<c:url value="/static/img/card_1_top.png" />" class="img-responsive">
-				<img src="<c:url value="/static/img/card_1_bottom.png" />" class="img-responsive">
+			<div class="col-xs-4 col-md-2 col-md-offset-3" id="game_played1">
 			</div>
-			<div class="col-xs-4 col-md-2">
-				<img src="<c:url value="/static/img/card_1_top.png" />" class="img-responsive">
-				<img src="<c:url value="/static/img/card_1_top.png" />" class="img-responsive">
-				<img src="<c:url value="/static/img/card_1_top.png" />" class="img-responsive">
-				<img src="<c:url value="/static/img/card_1_bottom.png" />" class="img-responsive">
+			<div class="col-xs-4 col-md-2" id="game_played2">
 			</div>
-			<div class="col-xs-4 col-md-2">
-				<img src="<c:url value="/static/img/card_1_top.png" />" class="img-responsive">
-				<img src="<c:url value="/static/img/card_1_top.png" />" class="img-responsive">
-				<img src="<c:url value="/static/img/card_back.png" />" class="img-responsive">
-				<img src="<c:url value="/static/img/card_back.png" />" class="img-responsive">
-				<img src="<c:url value="/static/img/card_back.png" />" class="img-responsive">
-				<img src="<c:url value="/static/img/card_back.png" />" class="img-responsive">
-				<img src="<c:url value="/static/img/card_back.png" />" class="img-responsive">
-				<img src="<c:url value="/static/img/card_back.png" />" class="img-responsive">
-				<img src="<c:url value="/static/img/card_back.png" />" class="img-responsive">
-				<img src="<c:url value="/static/img/card_back.png" />" class="img-responsive">
-				<img src="<c:url value="/static/img/card_back.png" />" class="img-responsive">
-				<img src="<c:url value="/static/img/card_back.png" />" class="img-responsive">
-				<img src="<c:url value="/static/img/card_back.png" />" class="img-responsive">
-				<img src="<c:url value="/static/img/card_1_bottom.png" />" class="img-responsive">
+			<div class="col-xs-4 col-md-2" id="game_deck">
 			</div>
 		</div>
 	</div>
@@ -65,17 +42,16 @@
 	<div class="container container-separator">
 		<div class="row">
 			<div class="col-xs-8 col-xs-offset-2 col-md-4 col-md-offset-4">
-				<button id="play" class="btn btn-xs btn-primary btn-block">Jugar</button>
+				<form>
+					<input type="hidden" name="selected" id="game_form_selected" value="0">
+					<button id="play" class="btn btn-xs btn-primary btn-block">Jugar</button>
+				</form>
 			</div>
 		</div>
 		<div class="row container-separator">
-			<div class="col-xs-6 col-md-2 col-md-offset-4">
-				<img src="<c:url value="/static/img/card_2_top.png" />" class="img-responsive card-top-selected">
-				<img src="<c:url value="/static/img/card_2_bottom.png" />" class="img-responsive card-bottom-selected">
+			<div class="col-xs-6 col-md-2 col-md-offset-4" id="game_option1">
 			</div>
-			<div class="col-xs-6 col-md-2">
-				<img src="<c:url value="/static/img/card_3_top.png" />" class="img-responsive">
-				<img src="<c:url value="/static/img/card_3_bottom.png" />" class="img-responsive">
+			<div class="col-xs-6 col-md-2" id="game_option2">
 			</div>
 			
 		</div>
